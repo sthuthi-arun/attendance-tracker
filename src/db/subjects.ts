@@ -13,12 +13,14 @@ export async function createSubject(input: NewSubject): Promise<number> {
     throw new Error('Subject name cannot be empty.');
   }
 
-  return db.subjects.add({
+  const newId = await db.subjects.add({
     name,
     targetPercentage: input.targetPercentage,
     archived: false,
     createdAt: new Date().toISOString(),
   });
+
+  return newId as number;
 }
 
 export async function updateSubject(id: number, changes: SubjectUpdate): Promise<void> {

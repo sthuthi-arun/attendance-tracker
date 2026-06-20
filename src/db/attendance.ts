@@ -21,13 +21,15 @@ export async function addAttendance(input: NewAttendanceRecord): Promise<number>
   const nextPeriod =
     sameDateRecords.length === 0 ? 1 : Math.max(...sameDateRecords.map((r) => r.period)) + 1;
 
-  return db.attendance.add({
+  const newId = await db.attendance.add({
     subjectId: input.subjectId,
     date: input.date,
     status: input.status,
     period: nextPeriod,
     createdAt: new Date().toISOString(),
   });
+
+  return newId as number;
 }
 
 export async function updateAttendance(id: number, changes: AttendanceUpdate): Promise<void> {
