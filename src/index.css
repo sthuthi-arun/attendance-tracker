@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-canvas text-ink;
+    font-feature-settings: 'cv11', 'ss01';
+  }
+
+  /* Keep focus states visible — accessibility floor, not optional */
+  :focus-visible {
+    @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-canvas;
+  }
+
+  ::selection {
+    @apply bg-accent/30 text-ink;
+  }
+}
